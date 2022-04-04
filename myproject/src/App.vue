@@ -1,13 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <TaskList :tasks="tasks"/>
+    <TaskItem :tasks="tasks"/>
   </div>
 </template>
 
 <script>
+import TaskList from './components/TaskList.vue'
+import TaskItem from './components/TaskItem.vue'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    TaskList, TaskItem
+  },
+  data () {
+    return {
+      tasks: [
+        {
+          title: 'he',
+          completed: false
+        },
+        {
+          title: 'he',
+          completed: false
+        }
+      ]
+    }
+  }
 }
 </script>
 
@@ -20,4 +40,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 </style>
