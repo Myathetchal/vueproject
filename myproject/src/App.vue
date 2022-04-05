@@ -18,11 +18,11 @@ export default {
     return {
       tasks: [
         {
-          title: 'he',
+          title: 'test1',
           completed: false
         },
         {
-          title: 'he',
+          title: 'test2',
           completed: false
         }
       ]

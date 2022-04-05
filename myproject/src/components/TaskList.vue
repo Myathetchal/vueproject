@@ -1,63 +1,67 @@
 <template id="task-list">
-    <section class="tasks">
-      <h1>
-        Tasks
-        <transition name="fade">
-          <small v-if="incomplete">({{ incomplete }})</small>
-        </transition>
-      </h1>
-      <div class="tasks__new input-group">
-        <input type="text"
-               class="input-group-field"
-               v-model="newTask"
-               @keyup.enter="addTask"
-               placeholder="New task"
-        >
-        <span class="input-group-button">
-          <button @click="addTask"
-                  class="button"
-          >
-            <i class="fa fa-plus"></i> Add
-          </button>
-        </span>
-      </div>
-      <div class="tasks__clear button-group pull-right">
-        <button class="button warning small"
-                @click="clearCompleted"
-        >
-          <i class="fa fa-check"></i> Clear Completed
-        </button>
-        <button class="button alert small"
-                @click="clearAll"
-        >
-          <i class="fa fa-trash"></i> Clear All
-        </button>
-      </div>
-      <transition-group name="fade" tag="ul" class="tasks__list no-bullet">
-          <task-item v-for="(task, index) in tasks"
-                     @remove="removeTask(index)"
-                     @complete="completeTask(task)"
-                     :task="task"
-                     :key="task"
-          ></task-item>
-      </transition-group>
-      <li class="tasks__item" v-for="task in tasks" :key="task">
-      <button class="className"
-          @click.self="$emit('complete')"
+  <section class="tasks">
+    <h1>
+      Tasks
+      <transition name="fade">
+        <small v-if="incomplete">({{ incomplete }})</small>
+      </transition>
+    </h1>
+    <div class="tasks__new input-group">
+      <input type="text"
+              class="input-group-field"
+              v-model="newTask"
+              @keyup.enter="addTask"
+              placeholder="New task"
       >
-        {{ task.title }}
-      </button>
-      <button class="tasks__item__remove button alert pull-right"
-              @click="$emit('remove')"
+      <span class="input-group-button">
+        <button @click="addTask"
+                class="button"
+        >
+          <i class="fa fa-plus"></i> Add
+        </button>
+      </span>
+    </div>
+    <div class="tasks__clear button-group pull-right">
+      <button class="button warning small"
+              @click="clearCompleted"
       >
-        <i class="fa fa-times"></i>
+        <i class="fa fa-check"></i> Clear Completed
       </button>
+      <button class="button alert small"
+              @click="clearAll"
+      >
+        <i class="fa fa-trash"></i> Clear All
+      </button>
+    </div>
+    <transition-group name="fade" tag="ul" class="tasks__list no-bullet">
+        <task-item v-for="(task, index) in tasks"
+                    @remove="removeTask(index)"
+                    @complete="completeTask(task)"
+                    :task="task"
+                    :key="task"
+        ></task-item>
+    </transition-group>
+    <li class="tasks__item" v-for="task in tasks" :key="task">
+    <button class="tasks__item__toggle"
+        @click.self="$emit('complete')"
+    >
+      {{ task.title }}
+    </button>
+    <button class="tasks__item__remove button alert pull-right"
+            @click="$emit('remove')"
+    >X
+      <i class="fa fa-times"></i>
+    </button>
     </li>
-    </section>
+  </section>
 </template>
 <script>
+import TaskItem from './TaskItem'
 export default {
   name: 'TaskList',
+  component: {
+    TaskItem
+  },
   props: {
     tasks: {default: []}
   },
@@ -120,35 +124,36 @@ export default {
   margin: 1em auto;
   overflow: auto;
   background-color: white;
-  box-shadow: 0px .25rem 1rem rgba(black, .25);
+  box-shadow: 0px .25rem 1rem rgba(0, 0, 0, 0.308);
 }
 .tasks__list {
   clear: both
 }
 .tasks__item {
   margin-bottom: .5em;
-  position: relative
+  position: relative;
+  list-style-type: none;
 }
 .tasks__item__toggle {
   cursor: pointer;
   width: 100%;
   text-align: left;
   padding: .85em 2.25em .85em 1em;
-  background-color: rgba(black, .05);
-  border: 1px solid rgba(black, .1);
+  background: rgb(247, 247, 247);
+  border: 1px solid rgb(211, 211, 211)
 }
 .tasks__item__toggle:hover {
-  background-color: rgba(black, .1);
-  border-color: rgba(black, .15);
+  background: rgb(228, 228, 228);
+  border: 1px solid rgb(185, 185, 185)
 }
 .tasks__item__toggle--completed {
   text-decoration: line-through;
-  background-color: rgba(green, .15);
-  border-color: rgba(green, .2);
+  background: rgba(1, 134, 1, 0.171);
+  border: rgba(1, 134, 1, 0.041);
 }
 .tasks__item__toggle--completed:hover {
-  background-color: rgba(green, .25);
-  border-color: rgba(green, .3);
+  background: rgba(1, 134, 1, 0.267);
+  border: rgba(1, 134, 1, 0.158);
 }
 .tasks__item__remove {
   position: absolute;
