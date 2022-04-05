@@ -3,7 +3,7 @@
     <h1>
       Tasks
       <transition name="fade">
-        <small v-if="incomplete">({{ incomplete }})</small>
+        <small v-if="incomplete">({{ incomplete }}) </small>
       </transition>
     </h1>
     <div class="tasks__new input-group">
@@ -41,14 +41,14 @@
                     :key="task"
         ></task-item>
     </transition-group>
-    <li class="tasks__item" v-for="task in tasks" :key="task">
-    <button class="tasks__item__toggle"
-        @click.self="$emit('complete')"
+    <li class="tasks__item" v-for="(task, index) in tasks" :key="task">
+    <button :class="[task.completed ? 'tasks__item__toggle tasks__item__toggle--completed' : 'tasks__item__toggle']"
+       @click="completeTask(task)"
     >
       {{ task.title }}
     </button>
-    <button class="tasks__item__remove button alert pull-right"
-            @click="$emit('remove')"
+    <button class="tasks__item__remove button alert pull-right ss"
+            @click="removeTask(index)"
     >X
       <i class="fa fa-times"></i>
     </button>

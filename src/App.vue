@@ -19,7 +19,7 @@ export default {
       tasks: [
         {
           title: 'test1',
-          completed: false
+          completed: true
         },
         {
           title: 'test2',
