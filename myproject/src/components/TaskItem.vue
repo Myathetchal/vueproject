@@ -16,24 +16,15 @@
 <script>
 export default {
   name: 'TaskItem',
-  props: ['tasks'],
+  props: ['task'],
   computed: {
     className () {
       let classes = ['tasks__item__toggle']
-      if (this.task.completed) {
-        classes.push('tasks__item__toggle--completed')
-      }
+      classes.push('tasks__item__toggle--completed')
       return classes.join(' ')
     }
   }
 }
 </script>
 <style scoped>
-.tasks__item {
-  color: red;
-}
-
-.sf {
-  font-size: 30px;
-}
 </style>
