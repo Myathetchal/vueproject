@@ -1,4 +1,4 @@
-<template>
+<template id="task-item">
      <li class="tasks__item">
       <button :class="className"
           @click.self="$emit('complete')"

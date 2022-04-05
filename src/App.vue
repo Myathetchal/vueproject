@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <TaskList :tasks="tasks"/>
-    <TaskItem :tasks="tasks"/>
   </div>
 </template>
 
 <script>
 import TaskList from './components/TaskList.vue'
-import TaskItem from './components/TaskItem.vue'
 
 export default {
   name: 'App',
   components: {
-    TaskList, TaskItem
+    TaskList
   },
   data () {
     return {

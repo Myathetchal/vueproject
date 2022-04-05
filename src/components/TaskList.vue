@@ -33,14 +33,6 @@
         <i class="fa fa-trash"></i> Clear All
       </button>
     </div>
-    <transition-group name="fade" tag="ul" class="tasks__list no-bullet">
-        <task-item v-for="(task, index) in tasks"
-                    @remove="removeTask(index)"
-                    @complete="completeTask(task)"
-                    :task="task"
-                    :key="task"
-        ></task-item>
-    </transition-group>
     <li class="tasks__item" v-for="(task, index) in tasks" :key="task">
     <button :class="[task.completed ? 'tasks__item__toggle tasks__item__toggle--completed' : 'tasks__item__toggle']"
        @click="completeTask(task)"
@@ -56,12 +48,8 @@
   </section>
 </template>
 <script>
-import TaskItem from './TaskItem'
 export default {
   name: 'TaskList',
-  component: {
-    TaskItem
-  },
   props: {
     tasks: {default: []}
   },
